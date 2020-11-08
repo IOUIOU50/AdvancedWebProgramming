@@ -41,7 +41,7 @@
 						        <tbody>
 						          <tr>
 						            <td>전자기기</td>
-						            <td><a href="../posting.jsp" class="subTitle">[덕진구/금암동] 전자레인지 빌려드려요</a></td>
+						            <td><a href="posting.jsp" class="subTitle">[덕진구/금암동] 전자레인지 빌려드려요</a></td>
 						            <td>문현호</td>
 						            <td>2020-11-13</td>
 						            <td>20</td>
