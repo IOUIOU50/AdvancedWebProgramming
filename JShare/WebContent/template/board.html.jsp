@@ -36,7 +36,7 @@
 		</style>
 </head>
 <body id="top">
-		<jsp:include page = "header.html"/>				
+		<jsp:include page = "header.jsp"/>				
 		<jsp:include page = "board.jsp"/>
 		<jsp:include page = "footer.html"/>
 </body>
