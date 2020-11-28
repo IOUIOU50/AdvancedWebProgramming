@@ -1,134 +1,167 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-
+<%@ page language="java" trimDirectiveWhitespaces="true"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.io.*"%>
+<%@ page import="java.text.DecimalFormat"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<%
+   int idx = Integer.parseInt(request.getParameter("id"));
+Connection conn = null;
+Statement stmt = null;
+
+// ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²°ê´€ë ¨ì •ë³´ë¥¼ ë¬¸ìì—´ë¡œ ì„ ì–¸
+String jdbc_driver = "com.mysql.jdbc.Driver";
+String jdbc_url = "jdbc:mysql://localhost/jsharing_integrated?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
+String title = null;
+String category = null;
+int price = 0;
+java.util.Date period = null;
+String context = null;
+String userId = null;
+java.util.Date postDate = null;
+OutputStream o = null;
+int hit = 0;
+String strPrice = null;
+
+//fields for load image
+Blob image = null;
+byte[] imgData = null;
+
+try {
+   // JDBC ë“œë¼ì´ë²„ ë¡œë“œ
+   Class.forName(jdbc_driver);
+
+   // ë°ì´í„°ë² ì´ìŠ¤ ì—°ê²°ì •ë³´ë¥¼ ì´ìš©í•´ Connection ì¸ìŠ¤í„´ìŠ¤ í™•ë³´
+   conn = DriverManager.getConnection(jdbc_url, "root", "5079");
+   stmt = conn.createStatement();
+
+   String sql = "SELECT post_title, category_id, post_price, post_period, post_context, user_id, post_date, post_photo, post_hit FROM post WHERE post_id="+ idx;
+   ResultSet rs = stmt.executeQuery(sql);
+   if (rs.next()) {
+      title = rs.getString(1);
+      category = rs.getString(2);
+      price = rs.getInt(3);
+      DecimalFormat df = new DecimalFormat("\u00A4 #,###");
+      strPrice = df.format(price);
+      period = rs.getDate(4);
+      context = rs.getString(5);
+      userId = rs.getString(6);
+      postDate = rs.getDate(7);      
+      hit = rs.getInt(9);
+
+      //get Image   
+
+   }
+   hit++;
+   sql = "UPDATE post SET post_hit=" + hit + " where post_id=" + idx;
+   stmt.executeUpdate(sql);
+   rs.close();
+   stmt.close();
+   conn.close();
+
+} catch (SQLException e) {
+}
+System.out.println("1. ì—¬ê¸°ê¹Œì§€ëŠ” ë¬´ì‚¬í†µê³¼");
+%>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script src="js/jquery.min.js"></script>
-<script src="js/skel.min.js"></script>
-<script src="js/skel-layers.min.js"></script>
-<script src="js/init.js"></script>
-<noscript>
-	<link rel="stylesheet" href="css/skel.css" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/style-xlarge.css" />
-</noscript>
+<title>ê²Œì‹œíŒ</title>
 <style>
-a {
-	text-decoration: none;
-}
-
-input[type="submit"] {
-	font-family: FontAwesome;
-	position: absolute;
-	z-index: 1;
-	top: 9px;
-	right: 75%;
-	font-size: 12px;
-	background: #629DD1;
-}
-
-table {
-	width: 60%;
+img {
+	display: block;
 	margin: auto;
+
+}
+
+.table {
+	margin: auto;
+	width: 80%;
 }
 </style>
-
-<title>°Ô½Ã±Û</title>
 </head>
-
 <body>
-	<jsp:include page="header.html" />
-
-	<hr>
+	<jsp:include page="header.jsp" />
 
 	<table>
 		<tr>
 			<td>
-				<table width="100%" cellpadding="0" cellspacing="0" border="0">
-					<tr
-						style="background: url('img/table_mid.gif') repeat-x; text-align: center; font-weight: bold; font-size: 1.5em; line-height: 1.0em; font-family: arial;">
-						<td width="5"><img src="img/table_left.gif" width="5"
-							height="30" /></td>
-						<td>[´öÁø±¸/±İ¾Ïµ¿] ÀüÀÚ·¹ÀÎÁö ºô·Áµå·Á¿ä</td>
-						<td width="5"><img src="img/table_right.gif" width="5"
-							height="30" /></td>
-					</tr>
-				</table>
-				<table width="413">
+
+				<table class="table">
 					<tr>
 						<td width="0">&nbsp;</td>
-						<td align="center" width="76"></td>
-						<td width="0"><img src="./images.jpg" alt="My Image"
-							width="400" height="200"></td>
+						<td align="center" width="100">ê¸€ë²ˆí˜¸</td>
+						<td width="319"><%=idx%></td>
+						<td width="0">&nbsp;</td>
 					</tr>
 					<tr height="1" bgcolor="#dddddd">
 						<td colspan="4" width="407"></td>
 					</tr>
 					<tr>
 						<td width="0">&nbsp;</td>
-						<td align="center" width="76">ºĞ·ù</td>
-						<td width="0">ÀüÀÚ±â±â</td>
+						<td align="center" width="76">ì¡°íšŒìˆ˜</td>
+						<td width="319"><%=hit%></td>
+						<td width="0">&nbsp;</td>
 					</tr>
 					<tr height="1" bgcolor="#dddddd">
 						<td colspan="4" width="407"></td>
 					</tr>
 					<tr>
 						<td width="0">&nbsp;</td>
-						<td align="center" width="76">Èñ¸Á °¡°İ</td>
-						<td width="0">200,000¿ø</td>
+						<td align="center" width="76">ì´ë¦„</td>
+						<td width="319"><%=userId%></td>
+						<td width="0">&nbsp;</td>
 					</tr>
 					<tr height="1" bgcolor="#dddddd">
 						<td colspan="4" width="407"></td>
 					</tr>
 					<tr>
 						<td width="0">&nbsp;</td>
-						<td align="center" width="76">´ë¿©±â°£</td>
-						<td width="0">2°³¿ù</td>
+						<td align="center" width="76">ì‘ì„±ì¼</td>
+						<td width="319"><%=postDate%></td>
+						<td width="0">&nbsp;</td>
 					</tr>
 					<tr height="1" bgcolor="#dddddd">
 						<td colspan="4" width="407"></td>
 					</tr>
 					<tr>
 						<td width="0">&nbsp;</td>
-						<td align="center" width="76">³»¿ë</td>
-						<td width="0">11/20ÀÏ±îÁö¸¸ ¿Ã¸®°í ³»·Á¿ä.<br> »ç¿ë°¨ ÀÖ¾î¿ä.<br>
-							³»ºÎ ´Û°í »ç¿ëÇÏ¼¼¿ä.<br> ½Ã°£ÀÌ ¾ø¾î ´Û¾Æµå¸®Áö ¸øÇØÇÏ°í ¼º´É ÁÁ¾Æ¿ä.<br>
-						<br> ÇöÀçµµ 50¸¸¿ø´ë·Î ÆÈ¸®´Â Á¦Ç°ÀÌ¿¡¿ä.<br> 3³âÁ¤µµ »ç¿ëÇß¾î¿ä.
-						</td>
+						<td align="center" width="100">ëŒ€ì—¬ê°€ê²©</td>
+						<td width="319"><%=strPrice%></td>
+						<td width="0">&nbsp;</td>
 					</tr>
 					<tr height="1" bgcolor="#dddddd">
 						<td colspan="4" width="407"></td>
-					</tr>
-					<tr>
+											<tr>
 						<td width="0">&nbsp;</td>
-						<td align="center" width="76">Á¶È¸¼ö</td>
-						<td width="0">20</td>
+						<td align="center" width="100">ëŒ€ì—¬ê¸°ê°„</td>
+						<td width="319"><%=period%>ê¹Œì§€</td>
+						<td width="0">&nbsp;</td>
 					</tr>
 					<tr height="1" bgcolor="#dddddd">
 						<td colspan="4" width="407"></td>
-					</tr>
-					<tr>
-						<td width="0">&nbsp;</td>
-						<td align="center" width="76">ÀÛ¼ºÀÚ</td>
-						<td width="0">¹®ÇöÈ£</td>
-					</tr>
-					<tr height="1" bgcolor="#dddddd">
-						<td colspan="4" width="407"></td>
-					</tr>
-					<tr>
-						<td width="0">&nbsp;</td>
-						<td align="center" width="76">ÀÛ¼ºÀÏ</td>
-						<td width="0">2020-11-13</td>
+						
 					</tr>
 
-
 					<tr>
-						<td width="0"></td>
+						<td width="0">&nbsp;</td>
+						<td align="center" width="76">ì œëª©</td>
+						<td width="319"><%=title%></td>
+						<td width="0">&nbsp;</td>
 					</tr>
+					<tr height="1" bgcolor="#dddddd">
 
+						<td colspan="4"><img src="view_test.jsp?id=<%=idx%>"
+							alt="ì‚¬ì§„ì´ ì—†ìŠµë‹ˆë‹¤." height="300px"></td>
+					</tr>
+					<tr height="1" bgcolor="#dddddd">
+						<td colspan="4" width="407"></td>
+					</tr>
+					<tr height="1" bgcolor="#dddddd">
+						<td colspan="4" height="200" style="font-weight: bold"><%=context%></td>
+					</tr>
 					<tr height="1" bgcolor="#dddddd">
 						<td colspan="4" width="407"></td>
 					</tr>
@@ -136,10 +169,14 @@ table {
 						<td colspan="4" width="407"></td>
 					</tr>
 					<tr align="center">
-						<td width="0">&nbsp;</td>
-						<td colspan="2" width="399"><input type=button value="´ä±Û">
-							<input type=button value="¸ñ·Ï" onclick="history.back()"> <input
-							type=button value="¼öÁ¤"> <input type=button value="»èÁ¦">
+						<td>&nbsp;</td>
+						<td colspan="2"><input type=button value="ê¸€ì“°ê¸°"
+							OnClick="window.location='Write.jsp'"> <input type=button
+							value="ëª©ë¡" OnClick="window.location='board'"> <input
+							type=button value="ìˆ˜ì •"
+							OnClick="window.location='modify.jsp?id=<%=idx%>'"> <input
+							type=button value="ì‚­ì œ"
+							OnClick="window.location='delete_ok.jsp?id=<%=idx%>&username=<%=userId%>'">
 						<td width="0">&nbsp;</td>
 					</tr>
 				</table>
@@ -147,5 +184,6 @@ table {
 		</tr>
 	</table>
 </body>
-
 </html>
+
+
