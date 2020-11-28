@@ -1,204 +1,118 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
+<%
+		if(session.getAttribute("id")==null){
+			out.print("<script>self.window.alert('ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.'); location.href=\'login.html';</script>");
+		}
+	%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<title>°Ô½ÃÆÇ</title>
-		<script src="js/jquery.min.js"></script>
-		<script src="js/skel.min.js"></script>
-		<script src="js/skel-layers.min.js"></script>
-		<script src="js/init.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-xlarge.css" />
-		</noscript>
-
+<title>JSharing-ì…°ì–´ë§í•˜ê¸°</title>
 </head>
 <style>
-body {
-	padding: 0;
-	margin: 0;
-	background: rgba(0, 0, 0, 0);
-}
-
-.header {
-	margin: 20px 0;
-	text-align: center;
-	position: relative;
-}
-
-.header a {
-	
-}
-
-hr {
-	margin-top: 30px;
-}
-
-.title {
-	display: inline;
-	margin-right: 100px;
-}
-
-.menu {
-	text-decoration: none;
-	margin-left: 30px;
-	color: black;
-}
-
-.category a {
-	text-decoration: none;
-	padding: 0 10px;
-	color: black;
-	transition: 0.3s;
-}
-
-.category a:hover {
-	color: white;
-	background-color: #111010d1;
-}
-
-.search {
-	width: 400px;
-	border-radius: 10px;
-	padding: 7px 3px;
-}
-
-.board {
-	width: 60%;
+.table {
 	margin: auto;
-	text-align: center;
-}
-
-#title {
-	width: 60%;
-}
-
-i {
-	font-size: 25px;
-}
-
-.fa-search {
-	position: absolute;
-	z-index: 1;
-	top: 20px;
-	right: 40.2%;
-	font-size: 24px;
-	color: black;
-}
-
-input.search:focus {
-	outline: none;
-}
-
-table {
-	width: 60%;
-	margin: auto;
+	width: 70%;
 }
 </style>
 
 <body>
-<!-- 	<header> -->
-			<jsp:include page = "header.html"/>				
-<!-- 		<div class="header"> -->
-<!-- 			<h1 class="title">JSharing</h1> -->
-<!-- 			<a href=""><i class="fas fa-search"></i></a> <input type="text" -->
-<!-- 				name="search" class="search"> <a href="./sharing" -->
-<!-- 				class="menu"><i class="far fa-handshake"></i> ½¦¾î¸µ ÇÏ±â </a> <a -->
-<!-- 				href="./board" class="menu"><i class="far fa-clipboard"></i> °Ô½ÃÆÇ</a> -->
-<!-- 			<hr> -->
-
-<!-- 			<ul class="category"> -->
-<!-- 				<a href="">ÀüÀÚ±â±â</a> -->
-<!-- 				<a href="">½ºÆ÷Ã÷</a> -->
-<!-- 				<a href="">°¡±¸</a> -->
-<!-- 				<a href="">ÆĞ¼Ç/ÀâÈ­</a> -->
-<!-- 				<a href="">Ãë¹Ì</a> -->
-<!-- 			</ul> -->
-<!-- 		</div> -->
-<!-- 	</header> -->
-	<hr>
+	<jsp:include page="header.jsp" />
 	<table>
-		<tr>
-			<td>
-				<table width="100%" cellpadding="0" cellspacing="0" border="0">
-					<tr
-						style="background: url('img/table_mid.gif') repeat-x; text-align: center;">
-						<td width="5"><img src="img/table_left.gif" width="5"
-							height="30" /></td>
-						<td>±Û¾²±â</td>
-						<td width="5"><img src="img/table_right.gif" width="5	"
-							height="30" /></td>
-					</tr>
-				</table>
-				<table>
-					<tr>
-						<td>&nbsp;</td>
-						<td align="center">Á¦¸ñ</td>
-						<td><input name="title" size="50" maxlength="100"></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr height="1" bgcolor="#dddddd">
-						<td colspan="4"></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td align="center">ºĞ·ù</td>
-						<td><label><input type="radio" name="category"
-								value="ElectricDevice">ÀüÀÚ±â±â</label> <label><input
-								type="radio" name="category" value="Sports">½ºÆ÷Ã÷</label> <label><input
-								type="radio" name="category" value="furniture">°¡±¸</label> <label><input
-								type="radio" name="category" value="fashion">ÆĞ¼Ç/ÀâÈ­</label> <label><input
-								type="radio" name="category" value="hobby">Ãë¹Ì</label></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr height="1" bgcolor="#dddddd">
-						<td colspan="4"></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td align="center">Èñ¸Á°¡°İ</td>
-						<td><input name="price" size="50" maxlength="50"></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr height="1" bgcolor="#dddddd">
-						<td colspan="4"></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td align="center">´ë¿©±â°£</td>
-						<td><input name="period" size="50" maxlength="50"></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr height="1" bgcolor="#dddddd">
-						<td colspan="4"></td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td align="center">³»¿ë</td>
-						<td><textarea name="memo" cols="50" rows="13"></textarea></td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr height="1" bgcolor="#dddddd">
-						<td colspan="4"></td>
-					</tr>
-					<tr height="1" bgcolor="#82B5DF">
-						<td colspan="4"></td>
-					</tr>
-					<tr align="center">
-						<td>&nbsp;</td>
-						<td colspan="2"><input type=button value="µî·Ï"> <input
-							type=button value="Ãë¼Ò">
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-			</td>
+		<tr
+			style="background: url('img/table_mid.gif') repeat-x; text-align: center;">
+			<td width="5"><img src="img/table_left.gif" width="5"
+				height="30" /></td>
+			<td>ê¸€ì“°ê¸°</td>
+			<td width="5"><img src="img/table_right.gif" width="5"
+				height="30" /></td>
 		</tr>
 	</table>
+	<form name=writeform method="POST" enctype="multipart/form-data"
+		action="Write_ok.jsp" pageEncoding="UTF-8">
+		<table class="table">
+			<tr>
+				<td>&nbsp;</td>
+				<td align="center">ì œëª©</td>
+				<td><input name="title" size="50" maxlength="100"></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td align="center">ë¶„ë¥˜</td>
+				<td><select name="category" id="category">
+						<option value="1">ì „ìê¸°ê¸°</option>
+						<option value="2">ìŠ¤í¬ì¸ </option>
+						<option value="3">íŒ¨ì…˜/ì¡í™”</option>
+						<option value="4">ê°€êµ¬</option>
+						<option value="5">ì·¨ë¯¸</option>
+				</select>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td align="center">í¬ë§ê°€ê²©</td>
+				<td><input name="price" size="50" maxlength="50"></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td align="center">ëŒ€ì—¬ê¸°ê°„</td>
+				<td><input name="period" size="10" maxlength="50" margin="1">ê¹Œì§€(yyyy-mm-dd
+					í˜•íƒœë¡œ ì‘ì„±)</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
+			<tr>
+				<td>&nbsp;</td>
+				<td align="center">ì‚¬ì§„ì²¨ë¶€</td>
+				<td><input type="file" name="file">(ìµœëŒ€ 3MB)</td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td align="center">ë‚´ìš©</td>
+				<td><textarea name="context" cols="50" rows="13"></textarea></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr height="1" bgcolor="#dddddd">
+				<td colspan="4"></td>
+			</tr>
+			<tr height="1" bgcolor="#82B5DF">
+				<td colspan="4"></td>
+			</tr>
+			<tr align="center">
+				<td>&nbsp;</td>
+				<td colspan="2"><input type=button value="ë“±ë¡"
+					onclick="javascript:writeCheck()"> <input type=button
+					value="ì·¨ì†Œ" onclick="javascript:history.back(-1)">
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</form>
+	<script language="javascript">
+		// ìë°” ìŠ¤í¬ë¦½íŠ¸ ì‹œì‘
+
+		function writeCheck() {
+			var form = document.writeform;
+
+			form.submit();
+		}
+	</script>
 </body>
 
 </html>
