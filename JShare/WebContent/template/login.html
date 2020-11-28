@@ -1,41 +1,91 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>JSharing</title>
-		
+    <meta charset="UTF-8">
+    <title>JSharing</title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    </noscript>
+    <style>
+        a {
+            text-decoration: none;
+        }
+        
+        input[type="submit"] {
+            font-family: FontAwesome;
+            position: absolute;
+            z-index: 1;
+            top: 9px;
+            right: 75%;
+            font-size: 12px;
+            background: #629DD1;
+        }
+        
+        table {
+            margin: auto;
+            text-align: center;
+            width: 70%;
+        }
+        
+        button {
+            text-align: center;
+        }
+        
+        input[type="submit"] {
+            position: absolute;
+            top: 220px;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 60px;
+        }
+        
+        div {
+            text-align: center;
+            margin-top: 150px;
+        }
+        
+        h1 {
+            font-weight: bold;
+            font-size: 24px;
+        }
+    </style>
+
 </head>
-	
+
 <body>
-	<form>	 	
-		 		<table align="center" height="40" width="430" border="0" style="border:solid 4px #66CCFF; margin-top:4%">
-	 			<tr>		
-	 				<td><input type="text" name="user_id" valu="" placeholder="ID" style="height:40px; width:430px;"/></td>
-	 			</tr>
-	 			</table>
-	 			<table align="center" height="40" width="430" border="0" style="border:solid 4px #66CCFF; margin-top:4%">
-	 			<tr>
-	 				<td><input type="text" name="user_pw" valu="" placeholder="PW" style="height:40px; width:430px;"></td>
-				</tr>
-				</table>
-				<table align="center" height="40" style="margin-top:1%">
-				
 
-				<td><input type="button" name="login" value="로그인" style="height:50px; width:430px;  background-color:#66CCFF; color:black; font-size:16px; border:solid 1px #66CCFF; "></td>
-				</tr>
-				</table>
-				
-				<table align="center" height="0" width="440" border="1" style="border:solid 1px #050099; margin-top:2%">
- 				</table>
+    <form name="login" action="login_ok.jsp" method="post">
+        <table>
+            <h1>로그인</h1>
+            <tr>
+                <td>아이디</td>
+                <td><input name="id" type="text" placeholder='id'></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input name="pw" type="password" placeholder='pw'></td>
+            </tr>
 
-				<table align="center" height="50" style="margin-top:1%" class="mo">
-				
-  <tr>
-   <td><a style="text-decoration:none;" href="member.html">회원가입 | </td> 
-   <td><a style="text-decoration:none;" href="주소">아이디 찾기 | </td>
-   <td><a style="text-decoration:none;" href="주소">비밀번호 찾기 |</td>
-  </tr>
+        </table>
+        <input type="submit" value="로그인">
+    </form>
+    <div>
+        <a href="member.html">회원가입 | 
+            <a href="주소">아이디 찾기 | 
+            <a href="주소">비밀번호 찾기 
+    </div>
 
-	
+    
+
+
 </body>
+
 </html>
