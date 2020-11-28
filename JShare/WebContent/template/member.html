@@ -2,51 +2,104 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>JSharing</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>JSharing</title>
+<meta charset="UTF-8">
+<title>JSharing</title>
+<script src="js/jquery.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/skel-layers.min.js"></script>
+<script src="js/init.js"></script>
+<noscript>
+	<link rel="stylesheet" href="template/css/skel.css" />
+	<link rel="stylesheet" href="template/css/style.css" />
+	<link rel="stylesheet" href="template/css/style-xlarge.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+</noscript>
+<style>
+a {
+	text-decoration: none;
+}
+
+table {
+	margin: auto;
+	text-align: center;
+	width: 70%;
+}
+
+button {
+	text-align: center;
+}
+
+input[type="submit"] {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 300px;
+}
+
+div {
+	text-align: center;
+	margin-top: 150px;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 24px;
+}
+</style>
 </head>
 <body>
-	<form action="만든 유저 자료가 보내짐" enctype="text/plain" method="post">
-	
-	 <table border="2px" bordercolor="gray" align="center">
-	 	<tbody>
-	 	<tr>
-	 		<td colspan="2"	bgcolor="#66CCFF" align="center">회원가입</td>
-	 	</tr>	
-	 	<tr>
-	 		<td bgcolor="lightgrey" align="center">이름</td>
-	 		<td><input type="text" name="user_name" valu="" style="height:30px; width:300px;"/></td>
-	 	</tr>
-	 	<tr>
-	 		<td bgcolor="lightgrey" align="center">아이디</td>
-	 		<td><input type="text" name="user_id" valu="" style="height:30px; width:300px;"/></td>
-		</tr>
-		<tr>
-			<td bgcolor="lightgrey" align="center">비밀번호</td>
-			<td><input type="text" name="user_pw" valu="" style="height:30px; width:300px;"/></td>
-		</tr>
-		<tr>
-			<td bgcolor="lightgrey" align="center">비밀번호확인</td>
-			<td><input type="text" name="user_pw2" valu="" style="height:30px; width:300px;"/></td>
-		</tr>
-		<tr>
-			<td bgcolor="lightgrey" align="center">학번입력</td>
-			<td><input type="text" name="school_id" valu="" style="height:30px; width:300px;"/></td>
-		</tr>
-		<tr>
-			<td bgcolor="lightgrey" align="center">학생인증</td>
-			<td><input type="text" name="mail_check" valu="" style="height:30px; width:300px;"/></td>
-		</tr>
-	 	
-	 	</tbody>
+	<form action="Signup_do.jsp" method="post">
+		<table>
+			<h1>회원가입</h1>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="name"></td>
+
+			</tr>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="id"></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="pw"></td>
+
+			</tr>
+			<tr>
+				<td>비밀번호 확인</td>
+				<td><input type="password"></td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td><input type="email" name="email"></td>
+			</tr>
+			<tr>
+				<td>핸드폰 번호</td>
+				<td><input type="text" name="phone_num"></td>
+			</tr>
+
+
 		</table>
-	 	
-	 	
-		<p align="center">
-			<input type="submit" name="submit" value="완료"/>
-			<input type="submit" name="submit" value="인증"/>
-			<input type="reset" name="reset" value="리셋"/>
-		</p>			
-	
-	</form>	
+		<input type="submit" value="회원가입">
+	</form>
+
+
+	<script>
+pw = document.getElementById("pw");
+
+pw_verify = document.getElementById("pw_verify");
+pw_verify.addEventListener('focusout', function(event){
+   if(pw.value != pw_verify.value){
+      alert("비밀번호가 일치하지 않습니다");
+      pw_verify.style.borderColor = "red";
+      pw_verify.style.color = "red";         
+   }
+});
+</script>
 </body>
 </html>
